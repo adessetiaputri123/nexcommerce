@@ -1,58 +1,270 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NexCommerce
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+NexCommerce adalah aplikasi **marketplace multi-vendor** berbasis Laravel dan React yang mendukung alur belanja customer, pengelolaan produk dan pesanan vendor, promosi, wallet, penarikan dana, notifikasi, audit log, serta laporan transaksi admin.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Customer
+- Melihat katalog dan detail produk
+- Pencarian produk dan toko
+- Promo otomatis dengan countdown
+- Keranjang belanja multi-vendor
+- Checkout dan pembayaran
+- Riwayat serta detail pesanan
+- Notifikasi transaksi
+- Pengelolaan profil dan kata sandi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Vendor
+- Dashboard performa toko
+- Tambah, edit, hapus, dan pulihkan produk
+- Pengelolaan foto utama produk
+- Pengelolaan SKU, harga, stok, dan varian
+- Pengelolaan status pesanan
+- Wallet vendor dan riwayat transaksi
+- Permintaan penarikan dana
+- Dukungan akses `vendor_owner` dan `vendor_staff`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Admin
+- Dashboard platform
+- Pengelolaan promosi
+- Peninjauan penarikan dana vendor
+- Audit log aktivitas
+- Laporan transaksi
+- Ekspor laporan CSV
+- Dukungan role `admin` dan `super_admin`
 
-## Learning Laravel
+## Teknologi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Laravel 13
+- PHP 8.3
+- React
+- Inertia.js
+- Tailwind CSS
+- Vite
+- MySQL
+- Laravel Queue
+- PHPUnit
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Role Pengguna
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Role | Deskripsi |
+|---|---|
+| `super_admin` | Memiliki akses penuh ke seluruh fitur admin |
+| `admin` | Mengelola fitur administratif sesuai izin |
+| `vendor_owner` | Pemilik toko dan pengelola utama vendor |
+| `vendor_staff` | Staf vendor dengan akses berbasis permission |
+| `customer` | Pembeli yang menggunakan katalog dan checkout |
 
-## Agentic Development
+## Persyaratan Lokal
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Pastikan perangkat sudah memiliki:
+
+- PHP 8.3 atau lebih baru
+- Composer
+- Node.js dan npm
+- MySQL
+- Git
+
+## Instalasi Lokal
+
+Clone repository:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/adessetiaputri123/nexcommerce.git
+cd nexcommerce
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Install dependency PHP:
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install dependency frontend:
 
-## Code of Conduct
+```bash
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Salin environment file:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Pada Windows PowerShell:
 
-## License
+```powershell
+Copy-Item .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Atur koneksi database pada `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nexcommerce
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Jalankan migration:
+
+```bash
+php artisan migrate
+```
+
+Seeder hanya digunakan untuk pengembangan. Pastikan seluruh password akun demo diganti sebelum digunakan di production.
+
+```bash
+php artisan db:seed
+```
+
+Buat symbolic link penyimpanan:
+
+```bash
+php artisan storage:link
+```
+
+Build frontend:
+
+```bash
+npm run build
+```
+
+Jalankan aplikasi:
+
+```bash
+php artisan serve
+```
+
+Untuk development frontend:
+
+```bash
+npm run dev
+```
+
+## Queue Worker
+
+NexCommerce menggunakan queue untuk proses yang berjalan di belakang layar.
+
+Jalankan worker:
+
+```bash
+php artisan queue:work --sleep=3 --tries=3 --timeout=120
+```
+
+## Menjalankan Pengujian
+
+```bash
+php artisan test
+```
+
+Pada audit integrasi terakhir, seluruh pengujian berhasil dijalankan:
+
+```text
+108 tests passed
+587 assertions
+```
+
+## Perintah Pembersihan Cache
+
+Gunakan perintah berikut setelah melakukan perubahan konfigurasi atau deployment:
+
+```bash
+php artisan optimize:clear
+```
+
+Untuk production:
+
+```bash
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan event:cache
+```
+
+## Deployment Railway
+
+Deployment Railway membutuhkan:
+
+1. Service aplikasi dari repository GitHub
+2. Database MySQL Railway
+3. Worker service untuk queue
+4. Volume atau object storage untuk gambar produk
+
+Environment variable utama:
+
+```env
+APP_NAME=NexCommerce
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=
+APP_URL=
+
+LOG_CHANNEL=stderr
+
+DB_CONNECTION=mysql
+DB_URL=${{MySQL.MYSQL_URL}}
+
+QUEUE_CONNECTION=database
+SESSION_DRIVER=database
+CACHE_STORE=database
+
+FILESYSTEM_DISK=public
+```
+
+Pre-deploy command:
+
+```bash
+php artisan migrate --force && php artisan optimize:clear && php artisan config:cache && php artisan event:cache && php artisan route:cache && php artisan view:cache
+```
+
+Worker start command:
+
+```bash
+php artisan queue:work --sleep=3 --tries=3 --timeout=120
+```
+
+Jangan menyimpan `APP_KEY`, password database, token, atau credential production di GitHub.
+
+## Struktur Halaman Utama
+
+```text
+resources/js/
+├── Components/
+├── Layouts/
+├── Pages/
+│   ├── Admin/
+│   ├── Auth/
+│   ├── Cart/
+│   ├── Checkout/
+│   ├── Notifications/
+│   ├── Orders/
+│   ├── Products/
+│   ├── Profile/
+│   ├── Vendor/
+│   ├── VendorOrders/
+│   └── VendorWallet/
+└── app.jsx
+```
+
+## Keamanan
+
+- File `.env` tidak boleh di-commit
+- `APP_DEBUG` harus `false` di production
+- Password akun seeder harus diganti
+- Worker tidak memerlukan domain publik
+- File upload production harus memakai persistent storage
+- Jangan menjalankan seeder demo secara otomatis di production
+
+## Lisensi
+
+Proyek ini dikembangkan untuk kebutuhan pembelajaran dan portofolio. Penggunaan, pengembangan, atau distribusi lebih lanjut dapat disesuaikan dengan kebutuhan pemilik proyek.
